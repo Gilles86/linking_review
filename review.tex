@@ -1,0 +1,909 @@
+\documentclass[doc 	]{apa}
+\usepackage{geometry}        
+\usepackage{float}
+\geometry{a4paper}          
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{apacite}
+\usepackage{multirow}
+\usepackage{color}
+\usepackage{enumitem}
+%\usepackage{multicol}
+\usepackage{longtable}
+\usepackage{pdflscape}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{mdframed}
+\captionsetup{compatibility=false}
+\captionsetup[table]{labelsep=space}
+
+\acknowledgements{Correspondence concerning this article may be addressed to: Scott Brown, School of Psychology, University of Newcastle, Callaghan NSW 2308, Australia; Email: scott.brown@newcastle.edu.au}
+\affiliation{
+$^a$ Department of Psychology, University of Amsterdam, The Netherlands  \\
+$^b$ School of Psychology, University of Newcastle, Australia  
+}
+
+\shorttitle{Linking behavioural and neural data}
+\rightheader{Linking behavioural and neural data}
+\leftheader{Linking behavioural and neural data}
+
+\begin{document}
+\title{Different ways of linking behavioral and neural data}
+\author{Gilles de Hollander$^a$, Birte U. Forstmann$^a$, and Scott D. Brown$^b$}
+
+
+\maketitle
+
+\tableofcontents
+
+\section{Abstract}
+Yet to be written.
+
+\section{Introduction}
+In recent years, cognitive neuroscientists have applied formal, computational
+cognitive models to more effectively understand how the brain implements cognitive processes such as decision making, reinforcement learning, and symbolic reasoning. Such formal cognitive models can
+decompose effects in behavioral data by description in terms of underlying latent cognitive processes and
+associated variables. ``Model-based cognitive neuroscience'' links these
+variables to brain measurements. This approach can, on the one hand, constrain
+the development of cognitive models, while, on the the other hand, also refine
+models that explain how cognitive processes are implemented in the brain
+\cite{forstmann2011reciprocal}. 
+
+Linking brain measurements to psychological constructs has been conceptualized as finding the \emph{bridge locus} of a cognitive process
+\cite{Teller:1984vj, Schall:2004ei}. \citeA[p. 1240]{Teller:1984vj} defines the
+simplest criterion for identifying a bridge locus as follows: ``This means, roughly, that
+if psychophysical and physiological data can be plotted on meaningfully similar
+axes, such that the two graphs have similar shapes, then that physiological
+phenomenon is a major causal factor in producing that psychophysical
+phenomenon''. Formal, computational cognitive models offer a means to make these axes more
+meaningful. But how do we link cognitive models to functional brain
+measurements most effectively? In the past decade, parameters of formal
+cognitive models have been linked to many measures of neural activity, such as
+EEG, fMRI, and single-cell recordings. These studies have employed wildly
+varying approaches, connecting variability in behavior and brain measurement at
+the level of subjects, conditions, and even trials. In some studies, cognitive
+models are used to set up testable hypotheses about brain activity. In other
+studies, cognitive model parameters are directly correlated against measurement
+models of neural data, after both models have been fit to their respective data
+domain. Some studies make a single model of both brain and behavior and try to
+predict both at the same time.
+
+In this review we aim to give a wide overview of what kind of linking has been
+used in the empirical literature, propose a taxonomy of these methods, and lay
+out future challenges and developments.
+
+\begin{landscape}
+\begin{center}
+\begin{longtable}{ | p{4cm} | p{5cm} | p{5cm} | p{5cm} |}
+    \hline
+     %% GILLES TO SCOTT: just out of curiosity, do you mean 'paradigm' as "Random dot motion paradigm" or in the Popperian sense?
+     %% SCOTT TO GILLES: I meant it in the sense of *experimental* paradigm. But I take your point that it's unclear, and have removed the reference.
+      & \emph{Evidence accumulation} & \emph{Reinforcement learning} & \emph{Symbolic reasoning} \\ \hline
+     \\
+     \textbf{Linking type}
+     \\ \hline
+     \emph{Qualitative structural linking} &
+ 	\textbf{\citeA{UsherMcClelland2001}}: the leaky competing accumulator model assumes that in evidence accumulation, accumulators corresponding to different choice options inhibit each other and also passively decay. This is inspired by the neural observations of mutual inhibition between neurons and passive decay of membrane potentials.
+	&
+	\textbf{\citeA{Frank:2006bf}}: a neural network model simulates dopamenergic basal-ganglia-cortical interactions. This is a neurocomputational model that makes qualitative predictions about both brain activity and behavior.
+	&
+	\textbf{\citeA{anderson:2007}}: the general ACT-R framework has, in its latest version, been explicitly linked to fMRI brain research. The framework assumes distinct cognitive modules and claims they can be related to respective parts of the brain.
+	\\
+    \hline
+     \emph{Qualitative predictive linking} &
+ 	\textbf{\citeA{Ho:2009da}}: evidence accumulation models predict distinct fMRI time courses for different drift rates. This qualitative prediction was supported by differences in the HRF across the entire brain. &
+	\textbf{\citeA{Berns:2001uo}}: neural recordings from two conditions with differing predictability in upcoming response with a certain associated value, as estimated by a temporal difference learning model are contrasted.
+	&
+	\textbf{\citeA{Borst:2010de}}: a priori predictions about differences across conditions in cognitive modules predict cortical activations, that are tested using fMRI. \\
+	\hline
+	\emph{Quantitative predictive linking} &
+ 	\textbf{\citeA{van2011neural}}: trial-to-trial fluctuations in response caution as estimated by STLBA are correlated with single-trial BOLD estimates. &
+	\textbf{\citeA{ODoherty:2003wy}}: an error signal as estimated by a reinforcement learning model was regressed against BOLD activity. OFC and ventral striatum coded for this signal.
+	&
+	\textbf{\citeA{Borst:2011jl}}: An ACT-R model predicted activity patterns for different cognitive modules during a multitasking paradigm. The activity of these modules was convolved with an HRF and regressed against fMRI volumes, to identify brain regions corresponding to the different cognitive modules.
+	 \\
+    \hline
+	\emph{Single model} &
+ 	\textbf{\citeA{Purcell:2012kr}}: constructed a model that takes raw neural data of a visual area as input. This model can then predict distributions of both behavioral data as well as neural data in a downstream evidence accumulation area &
+	&
+	\textbf{\citeA{anderson2011tracking}}: a simple RT-model of cognition was linked to a multivariate model of neural activation in fMRI by a Hidden semi-Markov Model (HSMM). The resulting joint model made predictions about cognitive states and neural recordings.
+	\\
+\hline
+\caption{Examples of four different approaches to linking models of evidence accumulation, reinforcement learning, and symbolic reasoning to neural data.} \label{table:examples}
+\end{longtable} \end{center}
+\end{landscape}
+
+\section{Looser and Tighter Links}
+
+There are many approaches to linking formal models of cognition to neural data.
+These approaches differ in how explicit and precise the link is made between
+neural, physiological processes on the one hand, and cognitive, phenomenal
+processes on the other hand. We propose a continuum of ``€˜tightness'' of
+linking€™. At the loosest level, cognitive models can be linked with neural data simply by constraining the kinds of structural assumptions allowed in the models in order to respect data about neural structures. Tighter links can be created by comparison of predictions for neural and behavioral data, or neural and behavioral model parameters. The very tightest and most explicit links are specified by ``€˜joint'' models€™ which make quantitative predictions about
+both neural and behavioral data at the same time. Table~\ref{table:examples}, and Figure~\ref{fig:levels_of_linking}, provide illustrative examples which are elaborated below. These examples highlight four commonly-used categories on the continuum between tight to loose linking.
+
+Below, we first provide definitions for those four different commonly-used levels of linking. Following that, we give detailed examples of these approaches in practice, with each level of linking illustrated in up to three different research domains: perceptual decision-making; reinforcement learning; and symbolic reasoning.
+
+\begin{description}
+\item \emph{Qualitative structural linking}: Neural data on the structure of
+the brain are used to constrain the structure of a cognitive model. An example
+of this is the leaky competing accumulator model (LCA): ``the principles
+included in the modelling effort have neurobiological as well as computational
+or psychological motivation, and the specific instantiations of the principles
+are informed by additional neurophysiological observations'' \cite<p.
+554;>{UsherMcClelland2001}.
+\item \emph{Qualitative predictive linking}: A cognitive model is tested using
+qualitative predictions about both neural and behavioral data. For example,
+\citeauthor{Borst:2010de} used the symbolic reasoning modelling framework of
+ACT-R to make predictions about the difference in fMRI-signals between conditions which differed in behavioral measures associated with task difficulty, separately for different brain regions: ``the model does not predict a general
+increase in BOLD response with task difficulty; instead, it predicts lower but
+more persistent activtation levels for the more difficult conditions in the
+visual and manual modules, and higher and more persistent activation levels for
+the more difficult conditions in the problem state and declarative memory
+modules'' \cite<p. 6;>{Borst:2010de}.
+\item \emph{Quantitative predictive linking}: the predictive output of
+a cognitive model is quantitatively related to some aspect of neural data. An early example of this approach acquired fMRI data during a Pavlovian
+conditioning task. The signal that was measured by fMRI was correlated with the
+error signal of a temporal difference (TD) algorithm performing the same task:
+``we used the actual output of a TD learning algorithm to generate a PE (or
+$\delta$) response at two main time points in a conditioning trial: the time of
+presentation of the CS and the time of presentation of the reward. The output
+of this algorithm was then entered into a regression model of fMRI measurements
+from subjects who underwent appetitive Pavlovian conditioning. This enabled us
+to test for brain regions that manifested a full range of TD error-related PE
+response'' \cite<p. 330;>{ODoherty:2003wy}.
+\item \emph{Single model}: a single generative model that predicts a joint
+distribution over both cognitive and neural data. For example, \citeauthor{Purcell:2010jo} used single-cell recordings from monkeys:
+``Models using actual visual neuron activity as input predicted not only the
+variability in observed behavior but also the dynamics of movement neuron
+activity. This union of cognitive modeling and neurophysiology strengthens the
+interpretation of visual neuron activity as a representation of perceptual
+evidence of saccade target location and the interpretation of movement neuron
+activity as the accumulation of that evidence'' \cite<p. 30;>{Purcell:2010jo}.
+\end{description}
+
+We will now present the four levels of linking using examples from the fields of evidence accumulation models, value-based decision-making models, and symbolic reasoning models.
+
+\section{Examples of qualitative structural linking}
+
+\subsection{Qualitative structural linking in models of evidence accumulation}
+
+Evidence accumulation models have been used to explain simple decision-making processes for more than fifty years \cite{Stone1960,Ratcliff1978,Luce1986}. More recently, attempts have been made to link the models with neural data. The earliest attempts, such as seminal work by \citeA{UsherMcClelland2001}, defined qualitative structural links. These links were structural in the sense that the constraints were applied to the structure of the model, not to the model's predictions, and the links were qualitative in the sense that the constraints revolved around the inclusion/exclusion of model elements, not to the quantitative parametric values taken.
+
+For example, the leaky competing accumulator model (LCA) of \citeA{UsherMcClelland2001} specifically included structural elements such as mutual inhibition between competing accumulators. This inclusion was motivated by neural data which demonstrate the prevalence of inhibitory connections between nearby neurons within the same cortical stratum. Similarly, the LCA included passive decay of accumulated evidence, to respect the neural observation that membrane potential decays back to baseline in the absence of input. Evidence in favor of these links was inferred by the observation that the resulting cognitive model was able to provide a good fit to behavioral data.
+
+\subsection{Qualitative structural linking in models of reinforcement learning}
+
+The classic parallel distributed processing models provided cognitive descriptions of learning including structural constraints from neural data \cite<PDP:>{RumelhartHintonMcClelland1986,RumelhartHintonWilliams1986}. The models assumed massive parallelism and distributed information representation, reflecting key findings in the emerging neural literature on cortical structure. The models also used learning rules such as back-propogation, which were inspired by neural findings such as Hebbian plasticity. 
+
+An important contribution of the PDP approach was its demonstration that very simple structures -- such as those found in cortex -- were sufficient to support quite complex computations, when endowed with the appropriate representation and learning assumptions. This contribution emerged directly out of the effort to link neural and cognitive data.
+
+\subsection{Qualitative structural linking in models of symbolic reasoning}
+
+The ACT-R production framework \cite{Anderson1992} is a domain-general model of human cognition. This model began as cognitive model purely aimed at behavioral data, but has since been extended in great detail to jointly consider behavioral and neural data \cite<e.g.,>{Sohnetal2003,Qinetal2003}. The earliest linking of the ACT-R model to neural data was qualitative structural linking, which identified links between different cognitive modules in ACT-R and different brain regions. These links respected findings about the localization of brain function that were emerging at the time from the then-new method of MRI. For example, the ``visual module'' of ACT-R is linked with lower occipital brain regions, and the ``motor module'' with motor cotices in the parietal and temporal lobes. These links define the structure of the model and allow the investigation of hypotheses about deficits due to brain lesions, for example. 
+
+
+\section{Examples of qualitative predictive linking} 
+
+One could argue that almost all work in cognitive neuroscience, and particularly cognitive neuroimaging, belongs in this category, because this research
+usually assumes at least some cognitive concepts like``working memory'',
+``attention'', ``semantic memory'' \cite{gazzaniga2007cognitive}, which, taken
+together, could be interpreted as a model. This cognitive model is then
+compared to neural data in some experimental paradigm that modulates the
+cognitive concept of interest. To be more specific, we will only focus on the subclass of
+computational cognitive models that allow for generative, quantitative predictions
+\cite{lewandowsky2010computational}. We do this because these kinds of models
+also offer the possibility of tighter, quantitative links to neural data,
+discussed in later sections.
+
+\subsection{Qualitative predictive linking in models of evidence accumulation}
+
+\citeA{Hanes:1996ww} recorded single-cell activity
+in the frontal eye fields (FEF) in behaving macaques. The activity of some
+neurons in this brain area, so-called ``movement neurons'', predicted the execution
+of saccades. \citeA{Hanes:1996ww} showed that the ramping activity of these
+neurons preceding a saccade always ended with the same firing rate, but the
+rate of increase of firing rate was variable. The authors related these
+qualitative patterns to evidence accumulation models. In certain evidence accumulation models, evidence builds up gradually before a response is made, with two key properties: the rate of build-up (the ``drift rate'') differs from decision to decision, but the amount of accumulated activity just before a response is issued (the ``threshold'') is always the same. \citeA{Hanes:1996ww} interpreted their findings as showing that variability in response time could be explained by variability in drift rate as
+opposed to variability in threshold of the decision-making process, a claim
+that is hard to prove or disprove when only using behavioral data. More and
+more electrophysiological work has since been interpreted in the framework
+offered by evidence accumulation models, reviewed by \citeA{Gold:2001vu} and \citeA{Forstmann:VLiQuR2S}.
+%% GILLES to SCOTT: this is a review paper by Birte, Roger, and EJ that will be published in annual review of psychology
+%% SCOTT to GILLES: Excellent. I don't know that paper, but please add it if you see fit.
+
+\citeA{Churchland:2008ds} noted that some evidence accumulation models also predict
+increased decision thresholds when the number of choice alternatives increases. This change in threshold is required in some models to counter the effect of ``statistical facilitation''; the tendency for the fastest-finishing of a set of accumulators to become even faster as the set grows larger \cite<e.g.>{UsherEtAl2002}. Increased thresholds counter both the decreased RT as well as the increased error rates associated with statistical facilitation, and bring model predictions into line with behavioral data, such as Hick's Law. 
+
+From a neural perspective, increased decision thresholds can be implemented in one of two ways: either by increasing the firing rate required to trigger a behavioral response, or by decreasing the baseline firing rate before a decision. \citeA{Churchland:2008ds} investigated these two possibilities, by examination of  neurons in the lateral intraparietal area (LIP) which behaved like evidence
+accumulators. Those neurons showed reduced baseline activity when more response choices were added. The subtle
+differences between a reduced baseline or an increased threshold are something
+that can not be distinguished using behavioral data only \cite{Smith:2004jo}.
+
+Qualitative links between neural data and evidence
+accumulation models have also been drawn using fMRI methods. For example, \citeA{Ho:2009da} hypothesized that areas that implement evidence accumulation
+during a perceptual decision-making task should show a delayed, temporally
+extended hemodynamic response function (HRF) during difficult trials, as compared to
+easy trials. They identified areas where the shape of the HRF differed
+substantially between conditions, by testing for interactions between task
+difficulty and BOLD activity at a set of multiple timepoints throughout the
+trial. The raw signal in these areas was averaged over trials, and this indeed
+showed the predicted qualiative pattern of delayed and longer hemodynamic
+responses for trials from a hard condition, as compared to the easy condition.
+
+\subsection{Qualitative predictive linking in models of reinforcement learning}
+
+The field of reinforcement learning and value-based decision-making has a long
+history of computational cognitive modelling \cite{Sutton:1998:IRL:551283}.
+These computational models made it possible to design experiments that
+manipulated model parameters across conditions and compare the corresponding
+neural and behavioral data \cite<e.g.,>{Berns:2001uo,Knutson:2001vi}.
+\citeA{Nieuwenhuis:2002uk} showed that modulating a single parameter in Holroyd
+\& Coles' neurocomputational reinforcement learning model could explain
+differences between age groups, by assuming plausible neuroanatomical
+differences. Nieuwenhuis et al. observed that the Holroyd and Coles' model
+could mirror the the impaired performance of older adults in a probabilistic
+learning task, as well as the accompanying reduced error-related negativity
+(ERN) measured by EEG. It could do so by varying only one parameter in the
+model that represents to the efficiency of dopaminergic connections to the
+anterior cingulate cortex (ACC). 
+
+Since the early 2000s, estimated model parameters of reinforcement learning
+models are quantitatively compared to differences in the neural signal, leading
+to a small revolution in the field, which will be discussed in the next
+section on quantitative predictive linking.
+
+\subsection{Qualitative predictive linking in models of symbolic reasoning}
+
+Continuing with our previous example, the ACT-R model assumes distinct
+cognitive modules that can perform different parts of cognitive tasks
+\cite{anderson:2007}. For example, the cognitive steps necessary for performing
+some symbolic logic operation might be modeled as involving the visual module
+(to perceive the stimulus), the procedural and declarative memory modules (to
+remember the logical rules), and the motor module (to produce the desired
+behavioral response). From these assumptions, ACT-R can make predictions about
+differences in reaction time and accuracy between conditions. Many neuroimaging
+studies have related cognitive ACT-R models to fMRI data to localize the
+cognitive modules within the brain. Such localization assumptions represent
+linking hypotheses, and subsequent studies have used qualitative predictive
+approaches to test those. For example, \citeA{Borst:2010de} constructed an
+ACT-R model of a task where both a subtraction operation, as well as a text
+entry had to be performed at the same time. The model made \emph{a priori}
+predictions about which modules (e.g., ``Problem State'', ``Declarative
+Memory'', ``Manual'', and ``Visual'') would be more activated during different
+combinations of easy/hard versions of the two tasks. These predictions about
+cognitive modules can be manifested as predictions about the behavioral data
+(via ACT-R's regular framework) and also as corresponding predictions for fMRI
+data, via the linking hypotheses which localize moudles. These predictions were
+confirmed by \citeA{Borst:2010de}, using a traditional region-of-interest fMRI
+study with different task contrast.
+
+The ACT-R community has come up with a ``standard atlas'', predicting where in
+the brain BOLD activity should be expected, given hypothetical activity of
+cognitive modules \cite{Anderson:2008ea,Borst:2015et}. The latest version of
+ACT-R software can even, given a model of a cognitive task, predict qualitative
+differences in BOLD-activity across different versions of a task. In recent
+work, these predictions have become more quantitative and can be empirically
+tested in fMRI data. This will be discussed in the next section.
+
+%This still uses qualitative constraints, but now applies them to the predictions of the model. So a model is used to generate qualitative predictions for neural data and corresponding behavioural data. E.g. In the ACT-R model, better recall in experimental condition A than B, and correspondingly larger BOLD signal in condition A than B from brain regions corresponding to the memory module of ACT-R (I'm a bit foggy on the details of this -- one of us will need to read up on some better ACT-R examples, or other models).
+
+%There are lots of examples in decision-making. The cortico-striatal model of SAT predicts greater activity in basal ganglia input regions in speed than accuracy conditions, and corresponding faster RTs in speed than accuracy conditions \cite{ForstmannEtAl2008}. Linking a region of the brain with evidence accumulation predicts faster onset of BOLD activation in easy than difficult conditions, and correspondingly faster RTs in easy than difficult conditions \cite{HoBrownSerences2009}. In monkeys, linking LIP or FEF neurons with accumulation dynamics predicts faster increase from baseline to threshold firing rate in easy than difficult conditions, and correspondingly faster RTs \cite{RoitmanShadlen2002,Schall2003}.
+
+%Maybe some of Philip and Roger's work fits in here. The shot-noise Poisson stuff, and the work with Philiastedes.
+
+
+\section*{Box 1: single-trial regression approach in fMRI}
+\renewcommand{\figurename}{Box}
+\begin{figure}[H]
+\caption*{The approach to link fMRI measurements to cognitive models that is
+currently dominating cognitive model-based neuroimaing is the so-called
+\emph{single-trial regression approach}. To understand how the single-trial
+regression approach works, it is helpful to first have a look at the related,
+traditional analysis of fMRI data using the general linear model (GLM).}
+\begin{subfigure}{0.85\textwidth}
+  \centering 
+  \includegraphics[width=\linewidth]{figure2a.eps}
+  \caption{\emph{The traditional GLM-approach} 
+	\\\hspace{\textwidth} The traditional GLM approach is tailored to find
+	differences in BOLD activation between experimental conditions. To do
+	this, a hypothetical neural signal is constructed for every condition
+	in the experimental design using block functions (top level). These
+	hypothethical signals are then convolved with a canonical HRF to make
+	them resemble fMRI data. These hypothetical BOLD responses are used as
+	regressors $X_i$ in a GLM. The parameters of the GLM are estimated as
+	to construct a weighted sum of the regressors that most resembles
+	the real BOLD signal. This yields a so-called $\beta$-parameter
+	estimate for every voxel and every condition. This parameter can be
+	interpreted as the estimated height of the BOLD-response for that
+	particular condition in that particular voxel. The GLM also yields the
+	variance of those estimates. By subtracting beta-values and combining
+	their variances, researchers can infer which voxels show a significant
+	difference in BOLD-response across conditions. The large majority of
+	fMRI-studies employ this analysis strategy. } \label{fig:glm_approach}
+\end{subfigure}
+\end{figure}
+
+\setcounter{figure}{0}
+\begin{figure}[H]
+\begin{subfigure}[b]{0.85\textwidth}
+  \setcounter{subfigure}{1} \centering
+  \includegraphics[width=\linewidth]{figure2b.eps} 
+  
+  \caption{\emph{the single trial
+  regression approach} \\\hspace{\textwidth} The traditional GLM approach can be
+  extended to the single trial regression approach. Now it is no longer
+  the heights of the BOLD response in different conditions that are estimated,
+  but the amount of correlation of the BOLD signal with some hypothetical
+  `cognitive' signal. In model-based neuroimaing, this signal is usually (a
+  transformation of) a parameter of the cognitive model that can be estimated
+  for single trials. These models parameters are converted to a hypothetical
+  neural signal by multiplying them with a block function, and this block
+  function is then converted to a hypothetical BOLD response by convolving them
+  with a canonical HRF. \\\hspace{\textwidth} The parameters of this
+  model-based GLM can also be fitted to every voxel in the brain, resulting in
+  a `correlation map'. Significant voxels in this map correspond to brain areas
+  in which the BOLD response reliably represent the cognitive model
+  parameter-of-interest. \\\hspace{\textwidth} The main advantage of the
+  single-trial-regression approach is its easy-of-use. The main fMRI software
+  packages (SPM, FSL, AFNI...) support the regression-approach out-of-the-box
+  and all a neuroimager needs to perform it is one value per trial to put into
+  her GLM. \\\hspace{\textwidth}The approach also has some disadvantages.
+  Firstly, it is for some cognitive models it is infeasible to get single-trial
+  estimates of a particular parameter. The prime example of this are evidence
+  accumulation-models, which are fitted to an entire distribution of behavioral
+  measurements and there exists no parameter estimates fo single trials
+  \cite<but see>{van2011neural}. Secondly, in the conventional regression
+  approach, the parameters of the cognitive model and the measurement model are
+  estimated separately. Estimating them together in a single model can increase
+  the precision of the estimates \cite{Turner:2010kt}. Lastly, the regression
+  approach has very strict linking assumptions. Researchers using it have to
+  assume that across the entire brain and every subject, the task-related BOLD
+  response follow the canonical HRF, and this response is modulated by the
+  cognitive parameter only in its height, in a linear fashion. In the
+  traditional single-trial regression approach it is virtually impossible to
+  relax these assumptions.}
+
+\end{subfigure}
+\end{figure}
+
+%\end{mdframed}
+
+
+\section{Examples of quantitative predictive linking}
+
+Computational cognitive models can also be linked to neural data in
+a quantitative way. This approach involves two models which are combined:
+a cognitive model that predicts behavior, as well as a neural model that
+predicts neural signals. Often, one of these two models is very much
+simplified. For example, the cognitive model may be as basic as simple signal
+detection theory, or the neural model may be as atheoretical as the mean signal
+between two response-locked timepoints. 
+
+
+\subsection{Quantitative predictive linking in models of reinforcement learning}
+
+Using quantitative outputs of a computational model of cognition to predict
+neural activity has been a successful strategy in the study of value-based
+decision-making and neuroeconomics \cite{Corrado:2009uj}. Especially prominent
+has been the \emph{single-trial regression approach}, in which parameters of
+a reinforcement learning model are estimated from choice behavior during tasks
+involving the learning of values associated with different choices. These
+subject-specific parameter estimates can be used to calculate estimates of the
+subjective values of the different choice options to the subject, for every
+individual trial during the experiment (note that these values are dynamic due
+to learning). These subjective, trial-by-trial values can then be used as
+a hypothetical cognitive signal that tracks, for example, the difference
+between the expected reward after a choice and the reward that was actually
+delivered (the so-called ``prediction error'' or ``delta'' signal). To
+investigate a linking hypothesis, the researcher then hypothesizes that this
+cognitive signal is represented in the brain, at the \emph{bridge locus}.
+Neural signals from the bridge locus should correspond to the phenomelogical
+concept under study, and to the hypothetical cognitive signal in this case
+\cite{Teller:1984vj}. For example, the bridge locus of the prediction error
+signal might be some area in the brain where the neural signal consistently
+tracks the difference between the expected reward and the actual reward in
+a reinforcement learning task. At a practical level, the hypothetical cognitive
+signal, as estimated by the reinforcement learning model, can be transformed to
+a hypothetical BOLD fMRI-signal, by convolution with a hemodynamic response
+function \cite{Glover:1999vv,friston2011statistical}. This creates
+a hypothetical fMRI signal corresponding to the prediction error signal, which
+can be used as a regressor in a general linear model (GLM), with additional
+regressors for other task-related activity (for example stimulus presentation).
+The parameters of this GLM are then estimated for all voxels in the brain. This
+yields a statistical parametric mapping of the brain that shows for which areas
+of the brain, BOLD activity correlates with the hypothetical neural signal
+representing stimulus value, and offers candidates for the bridge locus of
+interest. 
+
+
+%% SCOTT to GILLES: Is O'Doherty's study really "the first"? That's a big claim! If you aren't quite sure, maybe change to "an early"?
+%% I'm pretty sure it was the first.
+%% Birte said I should cite Daw. I think she means Daw, N. D., O¿Doherty, J. P., Dayan, P., Seymour, B., & Dolan, R. J. (2006). Cortical substrates for exploratory decisions in humans. Nature, 441(7095), 876¿879. doi:10.1038/nature04766 
+
+% However, this study is 3 years after o' Doherty, and the main finding is actually a contrast over 2 conditions: explorative versus exploiting trials, as estimated by a reinforcement learning model. So it's _not_ a regression approach.
+The first studies in cognitive model-based fMRI studies that used the
+regression approach were in the field of reinforcement-learning. For example,
+the approach was used to show that the BOLD activity in orbitofrontral cortex
+(OFC) and in ventral striatum was correlated with the temporal difference error
+signal as estimated by a reinforcement learning model \cite{ODoherty:2003wy}.
+Many studies using this approach were then pubblished in the domain of
+reinforcement learning. It has for example been shown that different parts of
+the striatum code for different kinds of value representations
+\cite<representing the value of states versus the value of
+actions;>{ODoherty:2004kcb} and that uncertainty about the stability of the
+payoff structure of the environment is computed and learning rate accordingly
+modulated by the anterior cingulate cortex \cite{Behrens:2007kk}.
+\citeA{Rodriguez:2006kv} applied the approach to the Rescorla-Wagner model
+during a categorization task, without explicit reward or punishment. Also more
+neurocomputational models, predicting how the different cortical inputs to
+striatum get integrated have been tested \cite{Haruno:2006gd}. 
+
+A recent study by \citeA{denOuden:2009gl} extended the single-trial regression
+approach to link parameter estimates of a reinforcement learning model to
+trial-to-trial variability in not only the \emph{magnitude of activation} in
+brain areas, but also to the \emph{functional connectivity} between brain
+areas. The cognitive model was used to predict on which trials activity between
+two areas was more correlated. The authors applied the Rescorla-Wagner model,
+a simple reinforcement learning model, to a paradigm where auditory stimuli --
+unrelated to the task at hand -- were predictive of visual stimuli that were
+also unrelated to the task. Because this relation was implicit, no behavior was
+available to fit the RL model to, but it was shown that functional connectivity
+between auditory and visual cortex was modulated by the prediction error. The
+authors used the single-trial prediction error, estimated by the RL model, as
+input for a dynamic causal modelling analysis \cite<DCM;>{Friston:2003cv}.
+Dynamic causal modelling can be used to study the causal influence of multiple
+brain areas on each other's BOLD signal. A DCM that assumed that the influence
+of the BOLD signal in auditory cortex on the BOLD signal in visual cortex was
+modulated by the predition error of a trial was more likely than other models.
+This finding suggests that effective connectivity between sensory areas is
+increased when the degree of surprise in the environment is larger, with the
+direction of causality corresponding to the direction of information flow. 
+
+A follow-up study \cite{denOuden:2010co} used a perceptual decision-making task
+(faces vs. houses) with cues that predicted upcoming stimuli. DCM showed that
+BOLD activity in the ventral striatum, related to prediction error (as
+quantified by a reinforcement learning model) modulated the functional
+connectivity between visual areas and motor areas. This results provides
+evidence that the detection of uncertainty in the environment increases the the
+neural influence of perceptual areas on motor areas.   
+
+\subsection{Quantitative predictive linking in models of symbolic reasoning}
+
+The ACT-R community constructs higher-level models of cognition that assume
+distinct cognitive modules and non-overlapping sequences of steps during information processing.
+%% SCOTT to GILLES: I've commented out the paragraph below, because I'm not convinced it adds enough to warrant the thematic detour.
+%\citeA{anderson2011tracking} extended these results by constructing multiple
+%versions of a hidden markov model for algebra tasks, with a varying number of
+%discrete substates within solving a problem. Model comparison techniques can
+%then help to find out how many discrete brain states exist within the process
+%of solving an algebra problem, taking into account both neural data, in the
+%form of fMRI activation volumes, as well as behavioral data, in the form of
+%reaction times.
+
+The single-trial regression approach has also gained a firm ground in the field
+of symbolic reasoning models, which was inspired by its succeses in reinforcement
+learning research. Models constructed in the latest version of the ACT-R
+architecture predict quantitative differences in activation between different
+cognitive modules during a trial. These predictions can be convolved with
+a canonical hemodynamic response function, generating quantitative hypotheses
+about which areas of the brain modulate their activity in correspondence with
+the activity of the proposed cognitive modules in the model. The first study
+that showed the potential of this approach used a complicated multitasking
+paradigm, where either a subtraction or a text entry task had to be performed,
+while at the same time performing a listening comprehension task
+\cite{Borst:2011jl}. The ACT-R model could predict, differently for every
+trial, the relative activity of ``Problem State'', ``Declarative Memory'',
+``Vision'', and ``Manual'' modules. Single-trial regression analysis showed
+correlated activity in corresponding cortical areas, largely overlapping with
+areas that had been related to these modules before by \citeA{anderson:2007}.%
+Interestingly, the
+%analysis found very similar brain areas that correlated to ``Vision'' and
+%``Manual'' modules, namely a mix of both primary visual and primary motor
+%areas. This lack of dissociation most likely arose because perceptual and
+%motor activity always occured at the same time. This made it impossible to
+%dissociate the two and this warns us that also in model-based neuroimaging, an
+%experimental design that orthogonalizes dependent variables of interest is
+%crucial.
+%% SCOTT to GILLES: As before, I suspect that the commented-out bit above is a level of detail that we don't really need.
+
+\citeA{Borst:2013fm} extended the results of \citeA{Borst:2011jl}, by applying
+the same approach to five previously acquired datasets and combining the
+results into a meta-analysis. Declarative memory retrieval, as predicted by the
+ACT-R models, correlated with activity in the IFG and the ACC, whereas updating
+of working memory was also related to activity in the inferior parietal lobule
+(IFL). The authors claimed that model-based imaging can help elucidate the
+roles of the different nodes in the frontoparietal network. This network
+includes both the IFG, ACC, as well as IFL and dissociating the individual
+roles of these nodes has turned out to be challenging when using the
+conventional subtraction-of-conditions approach, because the activity of the
+nodes in this network are highly correlated.
+
+% GILLES TO SCOTT: I used 'harder', because I think it is harder: due to the stochatic nature of evidence accumulation models, there are no nicely defined 'single trial estimates' of their parameters. I'm not sure anymore whether this should go in the subsection title, but I do think it's useful to reflect a bit on this, as this is a review paper...
+% SCOTT to GILLES: I see your point. I've removed ``harder'' from the heading, because I've also tried to make the headings consistent throughout the document. I will try to add some reflection on the difficulty of the process to the text.
+
+%\subsection{The link becomes harder: evidence accumulation models}
+\subsection{Quantitative predictive linking in models of evidence accumulation}
+
+Linking evidence accumulation models of speeded decision-making to neuroimaging
+data represents a more difficult challenge, in many ways, than for the models
+of reinforcement learning and symbolic reasoning reviewed above. The challenge
+is more difficult because models of speeded decision-making have to explain
+variability in reaction times, and the processes underlying decision-making are
+therefore assumed to be stochastic. Across trials, there is variability in the
+amount of evidence that is necessary to make a decision, as well as variability
+in the average speed of evidence accumulation \cite<as in the
+LBA;>{brown2008simplest}, possibly amongst even more variability \cite<e.g.,
+variability in non-decision time DDM;>{Ratcliff:2008fz}. This means that,
+unlike in most reinforcement learning models, there is no one-to-one
+correspondence between data and the parameters of the model at the level of
+a single trial. This precludes the very popular single trial regression
+approach, at least for ``out-of-the-box'' evidence accumulation models.
+Different alternatives to resolve this issue have been proposed and performed.
+
+One alternative is to change the unit of analysis from single trials to single
+subjects, focusing on the covariance of differences between subjects in neural
+and behavioral parameter estimates. In an fMRI study of decision-making,
+\citeA{forstmann2008striatum} instructed subjects to stress either the speed or
+accuracy of their decisions. The difference in BOLD-activity between accuracy-
+and speed-stressed trials in the striatum and the presupplementary motor area
+(pre-SMA) was correlated across subjects with the difference in model
+parameters related to response caution, estimated from behavioral data via the
+LBA model. In other words, participants who made large changes in their
+cognitive settings (for speed vs. caution) were the same participants who
+showed large changes in fMRI responses, and vice versa. This provides some
+evidence for a role of these brain areas in setting a response threshold before
+a decision is made. In a follow-up study, \citeA{forstmann2010cortico} extended
+the earlier finding to structural connectivity measures. They identified
+a correlation between individual differences in response caution between speed-
+and accuracy-stressed trials and the strength of white matter connections
+between pre-SMA and striatum as measured by diffusion weighted imaging (DWI).
+The study showed evidence that the stronger these connections are, the more
+flexible subjects are in adjusting their response threshold to the current task
+demands. 
+
+Using a similar across-subjects approach, \citeA{Mulder:2012gh} used probabilistic payoffs to shift the decision biases of participants. As usual, these shifts were explained in a perceptual decision making model (the drift diffusion model) as a shift in the starting point parameter -- responses favored by bias were represented as having starting points for evidence accumulation that were closer to the response threshold. Mulder et al. showed that estimates of the start point, taken from behavioral data, were correlated with the difference in fMRI
+activity between biased and unbiased trials in frontoparietal regions involved
+in action preparation.
+
+An alternative to the between-subjects approach is to link within-subject variability from neural and behavioral
+data by splitting the data on a neural measure and fitting a cognitive
+model to the subsets of behavioral data. \citeA{Ratcliff:2009ei} studied a perceptual decision-making task (houses vs. faces) and identified EEG components that classified trials as hard or as easy. Ratcliff et al. took trials from each single stimulus difficulty condition (in which nominal stimulus difficulty was constant) and applied a median split based on the amplitude of the
+EEG-component. Even though nominal stimulus difficulty was
+identical, estimated drift rates were lower in the trials with lower
+amplitude than trials with a higher EEG amplitude. Also, the estimated across-trial variability in difficulty was smaller for the median-split groups than when estimated from all trials at once. This pattern is consistent with the hypothesis that the EEG component indexes single-trial difficulty, and that restricting difficulty (estimated by EEG) reduces estimated variability in decision difficulty (measured by the model applied to the behavioral data).
+
+In a different approach, \citeA{van2011neural} took not the neural, but the
+behavioral data as a starting point. In an attempt to leverage the power of the
+single-trial regressor approach, they developed an extension of the standard
+linear ballistic accumulator model \cite<LBA;>{brown2008simplest}: the
+``single-trial linear ballistic accumulator model'' (STLBA). The STLBA provided
+maximum-likelihood (ML) parameter estimates for the start point of the winning
+accumulator, for every trial. For many trials this value is identical, but the
+ML starting points of more extreme trials offer variability to explain
+corresponding variability in (neural) data. van Maanen et al. used this model
+to analyze data from subjects performing a random-dot motion task, cued to
+stress either speed or accuracy. \citeauthor{van2011neural} did not use the
+standard single-trial regression approach, where convolved model-parameters are
+inserted into the GLM. Instead, the authors first estimated the height of the
+BOLD-response for the individual trials, assuming a canonical HRF
+\cite<see>{mumford2011deconvolving}. These single-trial estimates were then
+correlated with the amount of response caution of individual trials as
+estimated by the STLBA. The authors showed that BOLD activity in the pre-SMA
+and the doral ACC correlated significantly across trials with response caution
+during a speed-stressed response regime, but not during an accuracy-stressed
+response regime.
+
+\citeA{Boehm:2014cy} applied the STLBA of \citeauthor{van2011neural} to EEG
+data. The authors correlated single-trial estimates of response caution against
+the so-called contingent negative variation (CNV). The CNV is a buildup of
+negative EEG potential that occurs when subjects are shown a cue predicting an
+upcoming response stimulus. Its size was quantified by taking the mean
+potential between 100ms and 200ms before stimulus presentation at FCz, an EEG
+electrode close to pre-SMA. It turned out that the size of the CNV was linearly
+related to trial-to-trial variability in response caution within the same
+condition.
+
+%% SCOTT to GILLES: The paragraph below, about Cavanagh's work, might be moved to the "joint models" section. It's about as "joint" as Turner et al.'s work, I think. I understand that a limitation is that the EEG data were pre-processed quite a lot (to get to single-trial theta-power estimates) before linking, but after that a single model was jointly fit those estimates and the behavioural data. If you agree, move this to the appropriate section.
+%% GILLES to SCOTT: for me the 'joint modelling' section begins here: bayesian models where a covariance matrix is estimated between the two sources.
+Even more recent approaches to linking evidence accumulation models to neural
+data start with the neural signal, and use this as input to an extended
+evidence accumulation model. \citeA{Cavanagh:2011kj} estimated, separately for each trial in a decision-making experiment, the power in the theta frequency band from recorded EEG signals. These single-trial estimates of theta power were then used to inform parameter estimates in an extended version of the drift diffusion model \cite<HDDM;>{Wiecki:2013ir}. This model allowed for different estimates of the threshold parameter on different trials, and a covariate model to assess the association of single-trial theta power with single-trial threshold estimates. When the model was fitted to data, its Bayesian, probabilistic parameter estimates suggested that the coefficient of the covariate was probably larger than zero, which provides evidence that response caution (measured by the threshold parameter) is related to fluctuations in theta-power in medial prefrontal cortex.% The authors then also showed that this effect reverses in patients who have Parkinson's Disease but receive deep brain stimulation in the subthalamic nucleus. When the deep brain stimulation was provided, the coefficient for the covariate model switch signs, to negative values.
+%% SCOTT to GILLES: I've commented out the last two sentences above, because its not clear to me what the Parkinson's stuff means, and also how it adds to the discussion of linking hypotheses etc.
+
+Using the same model architecture, \citeA{Frank:2015hk} extended the findings
+of \citeA{Cavanagh:2011kj} to a reinforcement learning paradigm, where subjects
+had to learn to choose between two stimuli with different reward probabilities,
+while measuring both fMRI and EEG. A simple reinforcement learning model was
+fit to the responses of the subjects, as well as a drift diffusion model, using
+the approach of \citeA{Wiecki:2013ir} to yield single-trial estimates of
+decision threshold. The parameter estimates were subsequently compared with
+multiple neural measures, as well as the output of the reinforcement learning
+model. Model comparison techniques showed that the fits of the DDM were
+improved by using the value-difference between the presented choices, as
+estimated by the RL model, as a covariate for the the drift rate of the DDM. In
+addition, the DDM showed a better fit when the threshold parameter was included
+both the EEG and fMRI measures as covariates. This showed that the threshold
+parameter in the DDM model was reliably related to both cortical theta
+fluctuations as measured by EEG, as well as subcortical activations as measured
+by fMRI. For the fMRI data, single trial measures of BOLD activation were
+estimated using a slightly modified version of the canonical hemodynamic
+response function and a general linear model, applied to timecourses of
+predefined regions-of-interest. This was the first neuroscience study that
+relates both EEG and fMRI to a cognitive computational model at the same time.
+
+A similar approach to that of \citeauthor{Cavanagh:2011kj} and
+\citeauthor{Frank:2015hk} was developed in parallel by \citeA{Turner:2010kt}.
+Also in this ``joint modelling approach'', neural measures were used in
+addition to behavioral measures as input to an extended cognitive model. Turner
+et al.'s approach took the covariate-based analysis further, allowing for
+a general covariance matrix to link parameters of a behavioral model (the LBA
+model of decision-making) with the parameters of a neural model (a GLM). This
+approach supports more exploratory analyses, allowing the identification of
+different mappings from cognitive parameters to neural measures by studying the
+covariance matrix of the joint normal distribution; if a cognitive parameter is
+related to some neural measure, the covariance parameter that links them will
+be non-zero. \citeA{Turner:2010kt} showed, using the data of
+\citeA{forstmann2010cortico}, that this approach can find robust correlations
+between white-matter strength between pre-SMA and striatum, measured by
+diffusion-weighted magnetic resonance imaging (dMRI). 
+
+In a more recent paper, \citeA{Turner:2014tz} extended the joint modelling
+aproach of \citeA{Turner:2010kt} to relate single-trial BOLD activation
+estimates to single-trial parameter estimates of a drift diffusion model: the
+``neural drift diffusion model''. The statistical approach was the same as used by
+\citeA{Turner:2010kt}: a Bayesian generative model assumed
+that both single-trial BOLD activity, as well as single-trial drift rates were
+sampled from a common multivariate normal distribution. Markov chain Monte-Carlo sampling \cite<MCMC;>{kruschke2011doing,Turner:2013gb} offers the ability
+to sample from the marginal posterior distributions of the model parameters,
+after observing cognitive and neural data, and if neural activity is related to
+cognitive parameters, the corresponding covariance estimates of the joint
+normal distribution will be reliably different from zero. \citeA{Turner:2014tz} showed that
+when activity in the ``default mode network'' (DMN) was large at the onset
+of a trial, drift rates for that trial were lower. This
+could be explained as a lack of attention, or the presence of ``task-unrelated
+thoughts'', which decrease task performance.
+
+% GILLES TO SCOTT: I'm not sure if we should drop too many of the examples. Because the problem is harder for evidence accumulation models, people have come up with quite different approaches, with a slow evolution to more robust and formal ones. I like how this part of the text summarizes the approaches that have been used in the evidence accumulation domain, with increasing order of complexity. I notice that even in the Forstmann cognitive model-based imaging lab, there is confusion about what approaches have been used and how they relate to each other. However, we might remove some duplicate approaches: maybe the Forstmann 20150 DWI-paper, the Mulder bias-paper the Boehm STLBA-in-EEG-paper 
+% Aother difficulty issue for me is that the Turner and Wiecki-approaches are so similar but it seems orthogonally cited in the literature. 
+% What do you think?
+%% SCOTT to GILLES: I take your point. Lets leave it as you had it (although I've edited much of the text).
+
+\section{Single model approach}
+The next step in the modelling of neural and behavioral data is the development
+of models that can generate and predict both neural and behavioral data at the
+same time. Perhaps surprisingly, many of the approaches discussed above could
+in principle do that: if a researcher knows the size of a linear relationship
+between drift rate and BOLD amplitude, she can give the most-likely HRFs for
+a range of drift rates. However, in the applications of quantitative predictive
+modeling described above, the assumptions underlying the link are implicit and
+quite simplistic; usually, the neural model is nothing more than a descriptive
+measurement tool. Examples of such measurement models are the mean EEG
+amplitude in a fixed time window, or the linearly estimated height of the
+hemodynamic response in an fMRI signal, assuming a fixed shape across all
+subjects, areas and conditions. The assumed link between the cognitive
+parameter and neural measure is usually a strict linear one, with the added
+assumption of Gaussian noise.
+
+\subsection{Single model approaches in evidence accumulation}
+In some work in neurophysiology, the link between neural data and cognitive
+model is more explicit. The most complex models can take as input neural data
+from one source, and then predict neural data from another source, as well as
+behavior. \citeA{Purcell2010} identified and recorded from different clusters
+of cells in the frontal eye fields (FEF) in awake macaque monkeys during
+a visual search task. Some neurons in the FEF only respond to specific visual
+inputs (``visual'' neurons), some neurons respond only just before a saccade
+(``motor'' neurons), and some neurons respond to both (``visuomotor'' neurons).
+Considered from the perspective of an evidence accumulation model of
+decision-making, the visual neurons might be interpreted as providing
+a continuous, noisy, representation of decision evidence, and the motor neurons
+might be interpreted as the accumulators which process that evidence.
+\citeauthor{Purcell2010} did exactly this, and used the spike trains recorded
+from visual and visuomotor neurons as input to the accumulators of an evidence
+accumulation model. The authors showed that the model could use these inputs to
+reliably predict the behavioral data of the monkeys (response proportions and
+reaction time distributions). In this approach, the linking is made very
+explicit, and comparisons are made at the level of \emph{distributions} over
+neural and behavioral data; no single trial estimates were made.
+
+\citeA{Purcell2010} went further and compared the predictive performance of the model using nine different architectures for evidence accumulation. These architectures differed in things like the presence or absence of leakage in the accumulation process, or mutual inhibition between accumulators. Interestingly, the response proportions and response time distributions were well explained
+by many of the different model architectures, even though those architectures made very different assumptions about neural structure. Purcell et al. suggested that one way to distinguish between their nine models was to
+make quantitative predictions about the properties of neurons that accumulate
+evidence, the ``the motor neurons'', and then probe which model most resembles
+the actual neural charachteristics. Here, the linking of cognitive model and
+neural signal becomes very explicit and tight: it is assumed that the
+trajectory of evidence accumulation in the model maps identically on to spiking rates in
+motor neurons in FEF. The authors show that the onset of firing in motor
+neurons shows a correlation with RT, growth rate shows only a very minor,
+negative correlation, and baseline firing rate and ending firing rate don not
+correlate with RT at all. They then show that only one class of evidence accumulation architectures showed this pattern of correlation: the ``gated'' models, which assume that accumulation does not start until the amount of incoming evidence reaches a certain threshold.
+
+
+\subsection{Single model approaches in symbolic reasoning}
+Simple symbolic reasoning models have been combined with functional neuroimaging data in a single model using Hidden semi-Markov Models (HSMMs). Such models assume that, in order to perform a task, subjects linearly move through a discrete set of cognitive steps, or `states', until they finished the trial (usually by giving a response). A HSMM can be fit to both behavioral and neuroimaging data, where it is assumed that both are dependent measurements of the same sequence of states. 
+
+\citeA{Anderson:2010gi,Anderson:2011em} first applied this approach to
+a dataset where students solved linear algebra problems in a MRI scanner, where
+every step in solving the problem was made explicit using the task interface.
+The authors showed that, given both reaction times and functional neuroimaging
+data, it is possibleto reliably predict in which state of solving the linear
+algebra problem the subject currently is. Extending this finding,
+\citeA{Anderson:2014gx} showed that, in a paradigm where the different substeps
+of solving an algebra problem were not made explicit in the task interface, the
+number of cognitive states a subject goes through in a task can also be
+inferred by fitting different nested models. The authors provide evidence that
+these states correspond cognitive states like ``Problem encoding'', ``Planning,
+``Solving'' and ``Responding''. One way that they do so is inspecting the
+prototypical brain activation patterns corresponding to the different cognitive
+states. For example, the respond state corresponds to high activation in left
+motor cortex. Another crucial argument is that the duration of these substates
+was specifically modulated for different experimtal conditions. For example, RT
+differences across difficulty levels could almost exclusively be explained by
+differences in the length of the 'solving' state. Such an effect would be very
+hard to get at using only behavioral data.
+
+An important disadvantage of fMRI is the sluggishness of the hemodynamic
+response and the low temporal resolution it therefore provides. For
+experimental paradigms that (unlike algebra problems) take place on
+a sub-second timescale, EEG might be a more appropriate neuroimaging method to
+use in the HSMM framework, especially when one is interested in the possible
+number of substates that a subject goes through solving a task.
+\citeA{Borst:2015hf} combined EEG with the HSSM framework in an associative
+recognition task. The authors showed that both a familiarity process, an
+associative retrieval process and a decision process play a role. The study
+therefore speaks in favor of a dual-process model where both processes of
+recollection and familiarty are present, and against a global matching model.
+Its results dissociate between two main opposing theories in the literature on
+associative recognition and therfore provides an excellent example of how
+neuroimaging, when tightly linked to cognitive models, can help distinguish
+between different cognitive theories in a way behavioral data alone cannot.
+
+
+\section{Discussion}
+A growing number of researchers are working towards linking formal cognitive
+computational models with neuroscientific data. This linking effort is made in
+vastly different fields of cognitive modelling, ranging from perceptual and
+value-based decision-making to symbolic reasoning models. These models are
+also linked to neural data coming from very different neuronal imaging
+modalities, including measures as diverse as single-cell recordings, EEG, and
+fMRI. We categorized different kinds of linking that are applied in four
+discrete categories that vary along a continuum of how tight and how explicit
+the link between cognitive model and neural data is made. However, it is clear
+that even within these categories, different analyses are applied.
+
+The great majority of papers that have presented model-based links between
+neural and behavioral data, so far, are based on a regression analysis. This
+analysis tests for relationships between parameters estimated by a cognitive
+model and some aspect of a neural signal -- often a parameter estimated using
+a neural measurement model. In such approaches, the exact mapping from
+cognitive parameter to neural signal is typically left implicit, but upon
+closer inspection the link is almost always a linear relationship between
+a parameter of the cognitive model and a parameter of an easy-to-use,
+traditional measurement model of the neural signal. The role of the measurement
+model is to reduce the raw neural data to a single number (per subject, per
+condition, or per trial) which can easily be submitted to a standard regression
+analysis. For example, in functional MRI this measurement model is most often
+a standard GLM used to model BOLD responses via a canonical hemodynamic
+response function. The GLM allows the estimation of coefficients which index
+the height of the hemodynamic response function, or the difference in height
+between conditions, and it is these coefficients that are later correlated
+against the parameters of a cognitive model. In EEG, the measurement model is
+often nothing more than the mean signal intensity in a predefined
+stimulus-locked time window.
+
+The assumptions underlying these linking functions are almost never tested, even though there is ample evidence that they are probably often violated. For example, a central assumption of the
+canonical HRF model used in fMRI is that the HRF is identical across brain
+areas and subjects, but of course this is not true \cite<e.g.,>{gonzalez2012whole}. An
+even more problematic assumption is that cognitive processes, as modeled by
+computational models, would modulate only the amplitude of the task-locked
+hemodynamic response. Figure \ref{fig:hrfs} illustrates just how simplistic
+this assumption is. Contradicting this assumption, the main finding of multiple linking papers was a relationship between an estimated cognitive parameter and the \emph{delay}
+\cite{Ho:2009da} or \emph{dispersion} of the HRF \cite{Borst:2011jl}. We have also
+seen in our own data \cite<e.g.>{forstmann2008striatum}, that cue-locked
+differences in the height of the HRF across conditions are often accompanied by
+differences in the onset-till-peak of this HRF. These problems of violated or untested assumptions are not unique to fMRI measurement. For example, a frequent assumption in analyses of single-cell recordings is independence between recordings taken over different trials, cells, or conditions, but this is often not true \cite{Aarts:2014io}.
+
+The more advanced linking approaches we have reviewed, particularly the
+quantitative predictive approach and the single-model approach, will allow
+future work to focus on more complex relationships and formally incorporate
+them in their quantitative models. A useful strategy might be to steer away
+from standard approaches where many thousands of voxels are all regressed
+against the same cognitive parameters, using traditional SPM-scripts, and,
+instead focus on confirmatory, hypothesis-driven analyses. Single model linking
+approaches lend themselves very well to confirmatory approaches, as they allow
+-- indeed, require -- the researcher to build into the model explicit
+statements about exactly which and how cognitive parameters are related to the
+neural data. For example, a single model may do nothing more than link the BOLD
+signal from a predefined ananatomically-informed region-of-interest via
+a linear relationship between a cognitive model parameter and the height of
+a hemodynamic response function. Even though this limited example goes no
+further than many standard approaches, it makes all the assumptions quite
+explicit, and easily testable -- e.g. it would be easy to compare this model
+against one where the link function was sigmoidal, or was on the dispersion
+rather than height of the hemodynamic response function. A further advantage of
+reducing the tens-of-thousands single-voxel-signals to a limited set of
+anatomicaly-defined signals, is that more complex models, such as those that
+allow for shifts in onsets-to-peak and dispersion of the task-locked BOLD
+signal, also become computationally tractable. Bayesian probabilistic graphical
+models make it easy to link such models of neural activity to models of
+cognition, as both can be formalized with a set of quanatiative parameters and
+a likelihood function \cite{Turner:2010kt}. Such approaches would also fit well
+into the recent trend in functional neuroimaging research of a lesser focus on
+voxelwise, univariate analyses, and an emphasis on spatioptemporal patterns in
+corresponding anatomical regions in the brain \cite{Lohmann:2013kc}.
+
+
+\begin{figure}
+  %\centering
+  \includegraphics[width=.8\textwidth]{hrfs.png}
+  \caption{Standard canonical HRF model of BOLD-activity. In regression-based approaches, it is assumed that the only way the BOLD-response is modulated is that the canonical shape is multiplied by some factor $\beta$. \label{fig:hrfs}}
+\end{figure}
+
+Even if these quantitative links between model parameters and neural signals
+are made more explicit, researchers must still remain very careful and
+circumspect in the conclusions they draw from any of these statistical links
+they find between the two. Clearly, computational models that were developed in
+cognitive psychology are there to explain \emph{cognition}. At best, they give
+a formalization of the kind of cognitive processes the human brain can perform,
+how they differ in different circumstances, and formalize differences in
+cognition across subjects. They describe the algorithms that take place in the
+brain and which quantities it therefore has to compute, but these models stay
+agnostic about the precise implementation of these algorithms, the level of
+neural signals/recordings \cite{Moore:1956vr,Schall:2004ei}. 
+
+When an brain region is identified that shows a correlation between neural
+signal and a cognitive parameter, this area may be involved in computing the
+quantity that corresponds to that cognitive parameters. Nevertheless, it is
+still very unlikely that such a cognitive parameter is a cognitive process in
+itself, and that is has a simple one-to-one, cognitive-process-to-brain-area
+mapping  \cite{OReilly:2011ca}. This is so because many other hypotheses can be
+generated which are consistent with the observed link, but differ in the
+mechanics that explain the link (e.g., perhaps the identified region simply
+relays or mirrors the signal of interest). Finding relationships between
+cognitive models and is an excellent stepping stone toward more detailed
+neurocomputational models \cite<e.g.,>{bogacz2010neural}.
+
+\subsection{When is a linking approach not good enough?}
+
+It is difficult to avoid the appearance of value judgments in our proposed
+continuum of loose-to-tight linking. However, we would like to stress that it
+is not true that tighter linking is always preferable to looser linking. The
+ideal point on the continuum depends on many things, but most importantly on
+the status of the formal quantitative models in the research paradigm of
+interest. Tighter linking approaches are only feasible when there exist
+well-understood and mostly accepted quantitative models of both the behavioral
+data and the neural data in the paradigm of interest. Even more, these models
+must be computationally or analytically tractable, for any level of linking,
+and they should preferably specified at the level of distributions and
+likelihood functions for the tightest possible linking. Where these assumptions
+are not met, linking approaches beyond the simplest qualitative structural or
+qualitative predictive are not likely to succeed (e.g., this was the case for
+models of perceptual decision-making in the late 1990s). Conversely, in areas
+for which tractable quantitative models do exist, it is incumbent on
+researchers to strive for the tightest possible linking approaches (e.g., it is
+no longer reasonable for perceptual decision-making models to be linked to
+neural data using qualitative approaches).
+
+
+\section{Conclusions}
+
+Linking formal cognitive models to neural data can improve our understanding of
+how the brain functions. However, the precise technical details and
+philosophical approach to tackling this linking problem can vary greatly. We
+have focused on an important attribute of linking: the degree of tight,
+quantitative, and explicit hypothesizing. In each field of cognitive research,
+the earliest approaches to linking behavioral and neural data are typically
+qualitative. As knowledge is accumulated, and as formal models become more
+settled, linking approaches become more quantitative and more explicit. Even in
+that case, however, model parameters are most frequently estimated separately
+for the behavioral and neural models; the two models are brought together only
+at the very end, in a simple linear regression on model parameters. Future work
+should explicitly model how differences in cognitive parameters modulate
+differences in the signal in the neural domain, thereby acknowledging the
+richness of the data in the neural domain and exploit more than the most common
+parameter of the most simple measurement model in that domain.
+
+\bibliography{sbrefs,library_gilles}
+
+\end{document}  
